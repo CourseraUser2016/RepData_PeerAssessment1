@@ -6,14 +6,14 @@ library(knitr)
 opts_chunk$set(cache = TRUE)
 ```
 
-#Loading and preprocessing the data
+##Loading and preprocessing the data
 
 ```{r loaddata}
 setwd("C:/Users/Gaurav/OneDrive/Documents/Summer 2016.2017/Coursera/Reproducable Research/Course project 1")
 activity<-read.csv("activity.csv")
 ```
 
-#What is mean total number of steps taken per day?
+##What is mean total number of steps taken per day?
 1. 
 ```{r histogram}
 byday <- aggregate(cbind(steps)~date,data=activity[complete.cases(activity),],FUN=sum)
@@ -28,7 +28,7 @@ The median number of steps is:
 ```{r median}
 median(byday$steps)
 ```
-#What is the average daily activity pattern?
+##What is the average daily activity pattern?
 1.
 ```{r timeseriesplot}
 byinterval <- aggregate(cbind(steps)~interval,data=activity[complete.cases(activity),],FUN=mean)
@@ -40,7 +40,7 @@ plot(byinterval, type = "l", main = "Average daily activity pattern", xlab = "5-
 byinterval[byinterval$steps==max(byinterval$steps),]$interval
 ```
 
-#Imputing missing values
+##Imputing missing values
 1. The number of NA's in the dataset are:
 ```{r numofNA}
 sum(is.na(activity$steps))
@@ -75,7 +75,7 @@ median(byday_imputed$steps)
 ```
 Since the value used to impute the data is the mean, the mean daily number of steps does not change from before. Notice that the median number of daily steps does change since days where no data has been collected now have the same mean as the grand mean.
 
-#Are there differences in activity patterns between weekdays and weekends?
+##Are there differences in activity patterns between weekdays and weekends?
 1. 
 ```{r weekend/weekday}
 factorVariable<-weekdays(as.Date(imputedData$date))
